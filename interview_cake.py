@@ -59,7 +59,7 @@ will always come up with the solution.
 """
 
 
-def get_products_of_all_ints_except_at_index(int_list):
+def get_products_of_all_ints_except_at_index(int_list): 
 
 # Make a list with the products
 	if len(int_list) < 2:
@@ -80,11 +80,13 @@ def get_products_of_all_ints_except_at_index(int_list):
 #now we're storing the total product of all the other integers
 	product_so_far = 1
 	for i in range(len(int_list) - 1, -1, -1):
-		products_of_all_ints_except_at_index[i] *= product_so_far
+		products_of_all_ints_except_at_index[i] *= product_so_far 
 		product_so_far *= int_list[i]
 
 	return products_of_all_ints_except_at_index
 
+# [105, 42, 30, 70] 
+print(get_products_of_all_ints_except_at_index([2, 5, 7, 3]))
 
 def fib(n):
 	#takes an integer n and returns the nth Fibonacci
@@ -111,4 +113,26 @@ def fib(n):
 	return current
 
 
+class QueueTwoStacks(object):
+
+	def __init__(self):
+		self.in_stack = []
+		self.out_stack = []
+
+	def enqueue(self, item):
+		self.in_stack.append(item)
+
+	def dequeue(self):
+		if len(self.out_stack) == 0:
+
+			# move items from in_stack to out_stack, reversing order
+			while len(self.in_stack) > 0:
+				newest_in_stack_item = self.in_stack.pop()
+				self.out_stack.append(newest_in_stack_item)
+
+			# if out_stack is still empty, raise an error
+			if len(self.out_stack) == 0:
+				raise IndexError("Can't dequeue from empty queue!")
+
+		return self.out_stack.pop()
 
