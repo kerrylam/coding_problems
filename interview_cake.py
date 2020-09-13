@@ -225,6 +225,8 @@ def find_largest(root_node):
 
 
 def find_second_largest(root_node):
+	# This is O(lg n) time if tree is balanced, O(n) otherwise. O(1) space
+
 	if (root_node is None or
 			(root_node.left is None and root_node.right is None)):
 		raise ValueError("Tree must have at least 2 nodes")
@@ -247,6 +249,22 @@ def find_second_largest(root_node):
 
 
 
-	
+def get_max_profits(stock_prices):
+
+	max_profit = stock_prices[1] - stock_prices[0]
+	# We have to start at index 0 because we need to buy before we sell, this is the earliest we can buy
+	min_price = stock_prices[0]
+	# We want to start our loop at index 1 since this is where we can first sell
+	for price in stock_prices[1:]:
+		profit = price - min_price
+		if profit > max_profit:
+			max_profit = profit
+		# can also write max_profit = max(max_profit, profit)
+		if price < min_price:
+			min_price = price
+		# can also write min_price = min(min_price, price)
+
+	return max_profit
+
 
 
